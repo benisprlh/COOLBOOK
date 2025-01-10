@@ -150,8 +150,12 @@ export default function PostDetail({ route }) {
           <TextInput style={{ padding: 15 }} value={input.content} placeholder="Comment here..." onChangeText={(text) => handleInput(text)}></TextInput>
         </View>
         <TouchableOpacity onPress={handleComment}>
-          {loadingComment ? <ActivityIndicator style={{ position: 'absolute', right: 15, bottom: 10 }} /> : <Ionicons name="send" size={24} color="black" style={{ position: 'absolute', right: 15, bottom: 10 }} />}
+          {loadingComment ? <ActivityIndicator style={{ position: 'absolute', right: 15, bottom: 10 }} /> : <View >
+        <Ionicons style={{ position: 'absolute', right: 15, bottom: 25}} name="send" size={24} color="black"  />
+          <Text style={{ position: 'absolute', right: 10, bottom: 10 }}>Send</Text>
+        </View>}
         </TouchableOpacity>
+        
       </View>
     </>
   );

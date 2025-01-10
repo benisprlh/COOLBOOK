@@ -4,7 +4,7 @@ import * as SecureStore from 'expo-secure-store';
 import { setContext } from '@apollo/client/link/context';
 import { Platform } from 'react-native';
 
-const httpLink = createHttpLink({ uri: 'http://10.11.88.131:3000' });
+const httpLink = createHttpLink({ uri: 'http://10.100.34.222:3000' });
 
 const authLink = setContext(async (_, { headers }) => {
   let token;

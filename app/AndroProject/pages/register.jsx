@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Image, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { gql, useMutation } from '@apollo/client';
 import { LoginContext } from '../context/loginContext';
@@ -35,8 +35,13 @@ export default function Register({ navigation }) {
     try {
       if (loading) return;
       const response = await registerUser({ variables: input });
-      await loginAction('token', response.data.register.access_token);
-      await SecureStore.setItemAsync('token', response.data.login.access_token)
+      // await loginAction('token', response.data.register.access_token);
+      if(Platform.OS !== "web"){
+        // await SecureStore.setItemAsync('token', response.data.login.access_token)
+
+      }
+      navigation.navigate('Login');
+      // localStorage.setItem('token', esponse.data.login.access_token)
     } catch (error) {
       console.log(error);
     }
