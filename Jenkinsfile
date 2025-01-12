@@ -5,9 +5,32 @@ pipeline {
         // Path ke Node.js (pastikan Node.js sudah diinstal di server Windows)
         NODE_HOME = "C:\\Program Files\\nodejs"
         PATH = "${env.PATH};${NODE_HOME}"
+        MONGO_URI="mongodb+srv://benisaprulah5:SB8ypV82i80wOAt4@cluster0.2cocu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+        JWT_SECRET="initest"
+        REDIS_PASSWORD="nXKEIxZLa4YO1cHWwfc5bnf44wfoUR0S"
+        PORT="3000"
+        APP_PORT = "3000" // Port React Native App
+        SERVER_PORT = "5000" // Port Server
     }
 
     stages {
+
+        stage('Kill Previous Processes') {
+            steps {
+                echo 'Menghentikan proses sebelumnya yang menggunakan port aplikasi dan server...'
+                script {
+                    // Membunuh proses React Native App
+                    bat """
+                    FOR /F "tokens=5" %%P IN ('netstat -ano ^| findstr :${APP_PORT}') DO taskkill /F /PID %%P
+                    """
+                    // Membunuh proses Server
+                    bat """
+                    FOR /F "tokens=5" %%P IN ('netstat -ano ^| findstr :${SERVER_PORT}') DO taskkill /F /PID %%P
+                    """
+                }
+            }
+        }
+
         stage('Preparation') {
             steps {
                 echo 'Memulai pipeline untuk menjalankan aplikasi React Native di Web...'
@@ -56,7 +79,7 @@ pipeline {
                         dir('./app/AndroProject') {
                             bat '''
                             echo Memulai aplikasi React Native...
-                            npx expo start --web
+                            start npx expo start --web
                             '''
                         }
                     }
@@ -67,7 +90,7 @@ pipeline {
                         dir('./server') {
                             bat '''
                             echo Memulai server backend...
-                            npm run dev
+                            start npm run dev
                             '''
                         }
                     }
@@ -78,7 +101,12 @@ pipeline {
 
     post {
         always {
-            echo 'Pipeline selesai!'
+            echo 'Menghentikan proses aplikasi dan server...'
+            bat '''
+            echo Menghentikan React Native App...
+            taskkill /IM node.exe /F
+            echo Semua proses dihentikan.
+            '''
         }
         success {
             echo 'Pipeline berhasil menjalankan aplikasi dan server!'
