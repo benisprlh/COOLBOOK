@@ -31,14 +31,15 @@ export default function TabNavigation() {
             // You can return any component that you like here!
             return <Ionicons name={iconName} size={17} color={'#4267B2'} />;
           },
+          // tabBarActiveTintColor: 'tomato',
           tabBarInactiveTintColor: 'gray',
           tabBarShowLabel: true,
         })}
       >
         {/* <Tab.Screen name="Login" component={Login} /> */}
-        <Tab.Screen name="Home" options={{title: "Home"}} component={Home} />
-        <Tab.Screen name="Search" options={{title: "Search"}} component={Search} />
-        <Tab.Screen name="MyProfile" options={{title: "My Profile"}} component={MyProfile} />
+        <Tab.Screen name="Home"  options={{title: "Home", tabBarLabel: "Home"}} component={Home} />
+        <Tab.Screen name="Search" navigationKey='Search' component={Search} />
+        <Tab.Screen name="MyProfile" options={{title: "My Profile"}} navigationKey='MyProfile' component={MyProfile} />
       </Tab.Navigator>
     </>
   );

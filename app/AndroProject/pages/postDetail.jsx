@@ -155,7 +155,6 @@ export default function PostDetail({ route }) {
           <Text style={{ position: 'absolute', right: 10, bottom: 10 }}>Send</Text>
         </View>}
         </TouchableOpacity>
-        
       </View>
     </>
   );
