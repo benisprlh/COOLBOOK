@@ -41,30 +41,30 @@ pipeline {
             }
         }
 
-        stage('Deploy Frontend') {
-            steps {
-                script {
-                    echo 'Running frontend (React Native app for web)...'
-                    dir('./app/AndroProject') {
-                        sh '''
-                            npm install -g expo-cli
-                            npx expo start --web
-                        '''
-                    }
-                }
-            }
-        }
+        // stage('Deploy Frontend') {
+        //     steps {
+        //         script {
+        //             echo 'Running frontend (React Native app for web)...'
+        //             dir('./app/AndroProject') {
+        //                 sh '''
+        //                     npm install -g expo-cli
+        //                     npx expo start --web
+        //                 '''
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Deploy Backend') {
-            steps {
-                script {
-                    echo 'Running backend (Node.js server)...'
-                    dir('./server') {
-                        sh 'npm run dev'
-                    }
-                }
-            }
-        }
+        // stage('Deploy Backend') {
+        //     steps {
+        //         script {
+        //             echo 'Running backend (Node.js server)...'
+        //             dir('./server') {
+        //                 sh 'npm run dev'
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     post {
