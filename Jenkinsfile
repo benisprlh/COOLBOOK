@@ -67,18 +67,18 @@ pipeline {
         // }
     // }
 
-    post {
-        always {
-            echo 'Cleaning up workspace...'
-            cleanWs()
-        }
+    // post {
+    //     always {
+    //         echo 'Cleaning up workspace...'
+    //         cleanWs()
+    //     }
 
-        success {
-            echo 'Build and run successful!'
-        }
+    //     success {
+    //         echo 'Build and run successful!'
+    //     }
 
-        failure {
-            echo 'Build or run failed. Please check logs.'
-        }
-    }
+    //     failure {
+    //         echo 'Build or run failed. Please check logs.'
+    //     }
+    // }
 }
