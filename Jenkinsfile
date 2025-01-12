@@ -1,16 +1,13 @@
 pipeline {
     agent any
 
-    environment {
-        NODE_VERSION = '22' // Versi Node.js
-    }
-
     stages {
         stage('Preparation') {
             steps {
                 echo 'Preparing the environment...'
                 sh 'node -v' // Cek versi Node.js
                 sh 'npm -v' // Cek versi npm
+                sh 'cd ./MobileApp' // Cek versi npm
             }
         }
 
@@ -35,16 +32,19 @@ pipeline {
             }
         }
 
-        stage('Run Frontend') {
+        stage('Deploy Frontend') {
             steps {
                 echo 'Running frontend (React Native app for web)...'
                 dir('./app/AndroProject') {
-                    sh 'npx expo start --web'
+                    sh '''
+                        npm install -g expo-cli
+                        npx expo start --web
+                    '''
                 }
             }
         }
 
-        stage('Run Backend') {
+        stage('Deploy Backend') {
             steps {
                 echo 'Running backend (Node.js server)...'
                 dir('./server') {
