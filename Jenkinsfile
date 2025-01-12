@@ -25,8 +25,6 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 echo 'Melakukan checkout kode dari repository Git...'
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']],
-                          userRemoteConfigs: [[url: 'https://github.com/username/repository.git']]])
             }
         }
 
@@ -34,11 +32,11 @@ pipeline {
             steps {
                 echo 'Build aplikasi...'
                 // Contoh menjalankan perintah Windows batch untuk build
-                bat '''
-                echo Build dimulai...
-                mvn clean install
-                echo Build selesai.
-                '''
+                // bat '''
+                // echo Build dimulai...
+                // mvn clean install
+                // echo Build selesai.
+                // '''
             }
         }
 
@@ -46,11 +44,11 @@ pipeline {
             steps {
                 echo 'Menjalankan pengujian...'
                 // Contoh menjalankan pengujian
-                bat '''
-                echo Menjalankan pengujian unit...
-                mvn test
-                echo Pengujian selesai.
-                '''
+                // bat '''
+                // echo Menjalankan pengujian unit...
+                // mvn test
+                // echo Pengujian selesai.
+                // '''
             }
         }
 
@@ -58,12 +56,12 @@ pipeline {
             steps {
                 echo 'Mendeploy aplikasi...'
                 // Simulasi deployment (sesuaikan dengan kebutuhan Anda)
-                bat '''
-                echo Deploying ke server lokal...
-                mkdir C:\\deploy\\app
-                copy target\\*.jar C:\\deploy\\app
-                echo Deployment selesai.
-                '''
+                // bat '''
+                // echo Deploying ke server lokal...
+                // mkdir C:\\deploy\\app
+                // copy target\\*.jar C:\\deploy\\app
+                // echo Deployment selesai.
+                // '''
             }
         }
     }
