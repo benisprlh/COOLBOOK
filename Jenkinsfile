@@ -73,7 +73,7 @@ pipeline {
                         dir('./server') {
                             bat '''
                             echo Memulai server backend...
-                            startnpm run dev
+                            start npm run dev
                             '''
                         }
                     }
