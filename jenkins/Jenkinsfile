@@ -7,7 +7,7 @@ pipeline {
         BRANCH_TEST = 'loadrunner-test'                       // Branch untuk skrip pengujian
         VUGEN_SCRIPT_PATH = 'C:/Users/Administrator/Documents/VuGen/Scripts/WithRedis(1)' // Path skrip VuGen
         SCENARIO_PATH = 'C:/Users/Administrator/Documents/Controller/scenario/WithRedis(1)' // Path skenario Controller
-        LOADRUNNER_BIN = 'C:/Program Files (x86)/Micro Focus/LoadRunner/bin' // Path instalasi LoadRunner
+        LOADRUNNER_BIN = 'C:/Program Files (x86)/OpenText/LoadRunner/bin' // Path instalasi LoadRunner
     }
 
     stages {
