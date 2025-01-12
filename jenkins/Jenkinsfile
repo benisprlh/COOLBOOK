@@ -50,6 +50,7 @@ pipeline {
                 }
                 bat """
                     cd "${env.LOADRUNNER_BIN}"
+                    taskkill /F /IM "wlrun.exe"
                     wlrun.exe -Run -TestPath "${env.SCENARIO_PATH}" -ResultName "WithRedis(1)_results"
                 """
             }
