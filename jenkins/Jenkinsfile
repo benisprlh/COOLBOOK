@@ -1,0 +1,70 @@
+pipeline {
+    agent any
+
+    environment {
+        GIT_REPO = 'https://github.com/benisprlh/COOLBOOK.git' // URL repositori Git Anda
+        BRANCH_APP = 'main'                                   // Branch utama untuk aplikasi
+        BRANCH_TEST = 'loadrunner-test'                       // Branch untuk skrip pengujian
+        VUGEN_SCRIPT_PATH = 'C:/Users/Administrator/Documents/VuGen/Scripts/WithRedis(1)' // Path skrip VuGen
+        SCENARIO_PATH = 'C:/Users/Administrator/Documents/Controller/scenario/WithRedis(1)' // Path skenario Controller
+        LOADRUNNER_BIN = 'C:/Program Files (x86)/Micro Focus/LoadRunner/bin' // Path instalasi LoadRunner
+    }
+
+    stages {
+        stage('Checkout Application Branch') {
+            steps {
+                script {
+                    echo 'Checking out application branch...'
+                }
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: "*/${BRANCH_APP}"]],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [],
+                    userRemoteConfigs: [[url: "${GIT_REPO}"]]
+                ])
+            }
+        }
+
+        stage('Checkout Test Branch') {
+            steps {
+                script {
+                    echo 'Checking out test branch...'
+                }
+                dir('tests') { // Simpan skrip pengujian di folder "tests"
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: [[name: "*/${BRANCH_TEST}"]],
+                        doGenerateSubmoduleConfigurations: false,
+                        extensions: [],
+                        userRemoteConfigs: [[url: "${GIT_REPO}"]]
+                    ])
+                }
+            }
+        }
+
+        stage('Run LoadRunner Scenario') {
+            steps {
+                script {
+                    echo 'Running LoadRunner scenario...'
+                }
+                bat """
+                    cd "${env.LOADRUNNER_BIN}"
+                    wlrun.exe -Run -TestPath "${env.SCENARIO_PATH}" -ResultName "WithRedis(1)_results"
+                """
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline finished.'
+        }
+        success {
+            echo 'LoadRunner tests completed successfully.'
+        }
+        failure {
+            echo 'LoadRunner tests failed. Please check the logs.'
+        }
+    }
+}
