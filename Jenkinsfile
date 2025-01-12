@@ -45,31 +45,31 @@ pipeline {
             }
         }
 
-        // stage('Install Dependencies for App') {
-        //     steps {
-        //         echo 'Berpindah ke direktori ./app/AndroProject dan menginstal dependensi aplikasi...'
-        //         dir('./app/AndroProject') {
-        //             bat '''
-        //             echo Menginstal dependensi aplikasi...
-        //             npm install
-        //             echo Dependensi aplikasi berhasil diinstal.
-        //             '''
-        //         }
-        //     }
-        // }
+        stage('Install Dependencies for App') {
+            steps {
+                echo 'Berpindah ke direktori ./app/AndroProject dan menginstal dependensi aplikasi...'
+                dir('./app/AndroProject') {
+                    bat '''
+                    echo Menginstal dependensi aplikasi...
+                    npm install
+                    echo Dependensi aplikasi berhasil diinstal.
+                    '''
+                }
+            }
+        }
 
-        // stage('Install Dependencies for Server') {
-        //     steps {
-        //         echo 'Berpindah ke direktori ./server dan menginstal dependensi server...'
-        //         dir('./server') {
-        //             bat '''
-        //             echo Menginstal dependensi server...
-        //             npm install
-        //             echo Dependensi server berhasil diinstal.
-        //             '''
-        //         }
-        //     }
-        // }
+        stage('Install Dependencies for Server') {
+            steps {
+                echo 'Berpindah ke direktori ./server dan menginstal dependensi server...'
+                dir('./server') {
+                    bat '''
+                    echo Menginstal dependensi server...
+                    npm install
+                    echo Dependensi server berhasil diinstal.
+                    '''
+                }
+            }
+        }
 
         stage('Run Applications') {
             parallel {
@@ -79,8 +79,7 @@ pipeline {
                         dir('./app/AndroProject') {
                             bat '''
                             echo Memulai aplikasi React Native...
-                            npm install
-                            start npx expo start --web
+                            npx expo start --web
                             '''
                         }
                     }
@@ -91,8 +90,7 @@ pipeline {
                         dir('./server') {
                             bat '''
                             echo Memulai server backend...
-                            npm install
-                            start npm run dev
+                            npm run dev
                             '''
                         }
                     }
@@ -104,11 +102,11 @@ pipeline {
     post {
         always {
             echo 'Menghentikan proses aplikasi dan server...'
-            // bat '''
-            // echo Menghentikan React Native App...
-            // taskkill /IM node.exe /F
-            // echo Semua proses dihentikan.
-            // '''
+            bat '''
+            echo Menghentikan React Native App...
+            taskkill /IM node.exe /F
+            echo Semua proses dihentikan.
+            '''
         }
         success {
             echo 'Pipeline berhasil menjalankan aplikasi dan server!'
