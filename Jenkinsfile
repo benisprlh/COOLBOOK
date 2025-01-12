@@ -5,7 +5,7 @@ pipeline {
         // Path ke Node.js (pastikan Node.js sudah diinstal di server Windows)
         NODE_HOME = "C:\\Program Files\\nodejs"
         PATH = "${env.PATH};${NODE_HOME}"
-        MONGO_URI=mongodb+srv://benisaprulah5:SB8ypV82i80wOAt4@cluster0.2cocu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+        MONGO_URI="mongodb+srv://benisaprulah5:SB8ypV82i80wOAt4@cluster0.2cocu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
         JWT_SECRET="initest"
         REDIS_PASSWORD="nXKEIxZLa4YO1cHWwfc5bnf44wfoUR0S"
         PORT="3000"
