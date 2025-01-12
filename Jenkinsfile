@@ -2,16 +2,15 @@ pipeline {
     agent any
 
     environment {
-        // Variabel environment global, misalnya lokasi Java atau Node.js
-        JAVA_HOME = "C:\\Program Files\\Java\\jdk-17" 
-        PATH = "${env.PATH};${JAVA_HOME}\\bin"
+        // Path ke Node.js (pastikan Node.js sudah diinstal di server Windows)
+        NODE_HOME = "C:\\Program Files\\nodejs"
+        PATH = "${env.PATH};${NODE_HOME}"
     }
 
     stages {
         stage('Preparation') {
             steps {
-                echo 'Memulai pipeline...'
-                // Periksa environment untuk memastikan Jenkins berjalan di Windows
+                echo 'Memulai pipeline untuk menjalankan aplikasi React Native di Web...'
                 script {
                     if (!isUnix()) {
                         echo 'Pipeline berjalan di Windows'
@@ -22,46 +21,56 @@ pipeline {
             }
         }
 
-        stage('Checkout Code') {
+        stage('Install Dependencies for App') {
             steps {
-                echo 'Melakukan checkout kode dari repository Git...'
+                echo 'Berpindah ke direktori ./app/AndroProject dan menginstal dependensi aplikasi...'
+                dir('./app/AndroProject') {
+                    bat '''
+                    echo Menginstal dependensi aplikasi...
+                    npm install
+                    echo Dependensi aplikasi berhasil diinstal.
+                    '''
+                }
             }
         }
 
-        stage('Build') {
+        stage('Install Dependencies for Server') {
             steps {
-                echo 'Build aplikasi...'
-                // Contoh menjalankan perintah Windows batch untuk build
-                // bat '''
-                // echo Build dimulai...
-                // mvn clean install
-                // echo Build selesai.
-                // '''
+                echo 'Berpindah ke direktori ./server dan menginstal dependensi server...'
+                dir('./server') {
+                    bat '''
+                    echo Menginstal dependensi server...
+                    npm install
+                    echo Dependensi server berhasil diinstal.
+                    '''
+                }
             }
         }
 
-        stage('Test') {
-            steps {
-                echo 'Menjalankan pengujian...'
-                // Contoh menjalankan pengujian
-                // bat '''
-                // echo Menjalankan pengujian unit...
-                // mvn test
-                // echo Pengujian selesai.
-                // '''
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Mendeploy aplikasi...'
-                // Simulasi deployment (sesuaikan dengan kebutuhan Anda)
-                // bat '''
-                // echo Deploying ke server lokal...
-                // mkdir C:\\deploy\\app
-                // copy target\\*.jar C:\\deploy\\app
-                // echo Deployment selesai.
-                // '''
+        stage('Run Applications') {
+            parallel {
+                stage('Run React Native App') {
+                    steps {
+                        echo 'Menjalankan aplikasi React Native...'
+                        // dir('./app/AndroProject') {
+                        //     bat '''
+                        //     echo Memulai aplikasi React Native...
+                        //     npm start
+                        //     '''
+                        // }
+                    }
+                }
+                stage('Run Server') {
+                    steps {
+                        echo 'Menjalankan server backend...'
+                        // dir('./server') {
+                        //     bat '''
+                        //     echo Memulai server backend...
+                        //     npm start
+                        //     '''
+                        // }
+                    }
+                }
             }
         }
     }
@@ -71,10 +80,10 @@ pipeline {
             echo 'Pipeline selesai!'
         }
         success {
-            echo 'Pipeline berhasil dieksekusi!'
+            echo 'Pipeline berhasil menjalankan aplikasi dan server!'
         }
         failure {
-            echo 'Pipeline gagal!'
+            echo 'Pipeline gagal! Periksa log untuk detailnya.'
         }
     }
 }
