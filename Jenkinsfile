@@ -11,35 +11,35 @@ pipeline {
                 echo 'Preparing the environment...'
                 sh 'node -v' // Cek versi Node.js
                 sh 'npm -v' // Cek versi npm
-                sh 'npm -v' // Cek versi npm            
+                sh 'npm -v' // Cek versi npm  
                 }
             }
         }
 
-        stage('Install Dependencies') {
-            parallel {
-                stage('Frontend Dependencies') {
-                    steps {
-                        script {
-                            echo 'Installing frontend dependencies...'
-                            dir('./app/AndroProject') {
-                                sh 'npm install'
-                            }
-                        }
-                    }
-                }
-                stage('Backend Dependencies') {
-                    steps {
-                        script {
-                            echo 'Installing backend dependencies...'
-                            dir('./server') {
-                                sh 'npm install'
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        // stage('Install Dependencies') {
+        //     parallel {
+        //         stage('Frontend Dependencies') {
+        //             steps {
+        //                 script {
+        //                     echo 'Installing frontend dependencies...'
+        //                     dir('./app/AndroProject') {
+        //                         sh 'npm install'
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //         stage('Backend Dependencies') {
+        //             steps {
+        //                 script {
+        //                     echo 'Installing backend dependencies...'
+        //                     dir('./server') {
+        //                         sh 'npm install'
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
         // stage('Deploy Frontend') {
         //     steps {
