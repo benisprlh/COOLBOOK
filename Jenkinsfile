@@ -52,23 +52,23 @@ pipeline {
                 stage('Run React Native App') {
                     steps {
                         echo 'Menjalankan aplikasi React Native...'
-                        // dir('./app/AndroProject') {
-                        //     bat '''
-                        //     echo Memulai aplikasi React Native...
-                        //     npm start
-                        //     '''
-                        // }
+                        dir('./app/AndroProject') {
+                            bat '''
+                            echo Memulai aplikasi React Native...
+                            npx expo start --web
+                            '''
+                        }
                     }
                 }
                 stage('Run Server') {
                     steps {
                         echo 'Menjalankan server backend...'
-                        // dir('./server') {
-                        //     bat '''
-                        //     echo Memulai server backend...
-                        //     npm start
-                        //     '''
-                        // }
+                        dir('./server') {
+                            bat '''
+                            echo Memulai server backend...
+                            npm run dev
+                            '''
+                        }
                     }
                 }
             }
