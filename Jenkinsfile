@@ -15,12 +15,12 @@ pipeline {
         stage('Preparation') {
             steps {
                 script {
-                    {
+                    
                 echo 'Preparing the environment...'
                 sh 'node -v' // Cek versi Node.js
                 sh 'npm -v' // Cek versi npm
                 sh 'cd ./MobileApp' // Cek versi npm
-            }
+            
                 }
             }
         }
