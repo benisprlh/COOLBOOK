@@ -8,7 +8,7 @@ pipeline {
         VUGEN_SCRIPT_PATH = 'C:/Users/Administrator/Documents/VuGen/Scripts/WithRedis(1)/WithRedis(1).usr' // Path skrip VuGen
         SCENARIO_PATH = 'C:/Users/Administrator/Documents/Controller/scenario/WithRedis.lrs' // Path skenario Controller
         LOADRUNNER_BIN = 'C:/Program Files (x86)/OpenText/LoadRunner/bin' // Path instalasi LoadRunner
-        RESULT_TEST = 'C:\Users\Administrator\Documents\Result\Res'
+        RESULT_TEST = 'C:/Users/Administrator/Documents/Result/Res'
     }
 
     stages {
