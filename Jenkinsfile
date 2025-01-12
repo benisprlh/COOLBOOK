@@ -3,18 +3,18 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Preparation') {
-            steps {
-                script {
+    // stages {
+    //     stage('Preparation') {
+    //         steps {
+    //             script {
                     
-                echo 'Preparing the environment...'
-                sh 'node -v' // Cek versi Node.js
-                sh 'npm -v' // Cek versi npm
-                sh 'npm -v' // Cek versi npm  
-                }
-            }
-        }
+    //             echo 'Preparing the environment...'
+    //             sh 'node -v' // Cek versi Node.js
+    //             sh 'npm -v' // Cek versi npm
+    //             sh 'npm -v' // Cek versi npm  
+    //             }
+    //         }
+    //     }
 
         // stage('Install Dependencies') {
         //     parallel {
