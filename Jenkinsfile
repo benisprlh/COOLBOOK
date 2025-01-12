@@ -5,6 +5,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
+                sh 'cd ./app/AndroProject'
+                sh 'npm install'
             }
         }
         stage('Test') {
