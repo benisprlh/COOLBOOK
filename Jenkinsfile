@@ -5,7 +5,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'echo "Service user is $SERVICE_CREDS_USR"'
+                cd ./app/AndroProject
+                npm install
             }
         }
         stage('Test') {
