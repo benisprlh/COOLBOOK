@@ -14,6 +14,7 @@ pipeline {
                 script {
                     if (!isUnix()) {
                         echo 'Pipeline berjalan di Windows'
+                        echo 'Pipeline berjalan di Windows'
                     } else {
                         error 'Pipeline ini dirancang untuk OS Windows!'
                     }
