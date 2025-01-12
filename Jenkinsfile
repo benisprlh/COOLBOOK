@@ -102,11 +102,11 @@ pipeline {
     post {
         always {
             echo 'Menghentikan proses aplikasi dan server...'
-            bat '''
-            echo Menghentikan React Native App...
-            taskkill /IM node.exe /F
-            echo Semua proses dihentikan.
-            '''
+            // bat '''
+            // echo Menghentikan React Native App...
+            // taskkill /IM node.exe /F
+            // echo Semua proses dihentikan.
+            // '''
         }
         success {
             echo 'Pipeline berhasil menjalankan aplikasi dan server!'
