@@ -1,14 +1,28 @@
+library(
+  identifier: 'jenkins-shared-library@1.0.4',
+  retriever: modernSCM(
+    [
+      $class: 'GitSCMSource',
+      remote: 'https://github.com/hoto/jenkins-shared-library.git'
+    ]
+  )
+)
+
 pipeline {
     agent any
 
     stages {
         stage('Preparation') {
             steps {
+                script {
+                    
                 echo 'Preparing the environment...'
                 sh 'node -v' // Cek versi Node.js
                 sh 'npm -v' // Cek versi npm
                 sh 'npm -v' // Cek versi npm
                 sh 'cd ./MobileApp' // Cek versi npm
+            
+                }
             }
         }
 
@@ -16,17 +30,21 @@ pipeline {
             parallel {
                 stage('Frontend Dependencies') {
                     steps {
-                        echo 'Installing frontend dependencies...'
-                        dir('./app/AndroProject') {
-                            sh 'npm install'
+                        script {
+                            echo 'Installing frontend dependencies...'
+                            dir('./app/AndroProject') {
+                                sh 'npm install'
+                            }
                         }
                     }
                 }
                 stage('Backend Dependencies') {
                     steps {
-                        echo 'Installing backend dependencies...'
-                        dir('./server') {
-                            sh 'npm install'
+                        script {
+                            echo 'Installing backend dependencies...'
+                            dir('./server') {
+                                sh 'npm install'
+                            }
                         }
                     }
                 }
@@ -35,21 +53,25 @@ pipeline {
 
         stage('Deploy Frontend') {
             steps {
-                echo 'Running frontend (React Native app for web)...'
-                dir('./app/AndroProject') {
-                    sh '''
-                        npm install -g expo-cli
-                        npx expo start --web
-                    '''
+                script {
+                    echo 'Running frontend (React Native app for web)...'
+                    dir('./app/AndroProject') {
+                        sh '''
+                            npm install -g expo-cli
+                            npx expo start --web
+                        '''
+                    }
                 }
             }
         }
 
         stage('Deploy Backend') {
             steps {
-                echo 'Running backend (Node.js server)...'
-                dir('./server') {
-                    sh 'npm run dev'
+                script {
+                    echo 'Running backend (Node.js server)...'
+                    dir('./server') {
+                        sh 'npm run dev'
+                    }
                 }
             }
         }
