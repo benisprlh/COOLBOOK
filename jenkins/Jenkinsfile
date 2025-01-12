@@ -8,6 +8,7 @@ pipeline {
         VUGEN_SCRIPT_PATH = 'C:/Users/Administrator/Documents/VuGen/Scripts/WithRedis(1)/WithRedis(1).usr' // Path skrip VuGen
         SCENARIO_PATH = 'C:/Users/Administrator/Documents/Controller/scenario/WithRedis.lrs' // Path skenario Controller
         LOADRUNNER_BIN = 'C:/Program Files (x86)/OpenText/LoadRunner/bin' // Path instalasi LoadRunner
+        RESULT_TEST = 'C:\Users\Administrator\Documents\Result\Res'
     }
 
     stages {
@@ -51,7 +52,7 @@ pipeline {
                 bat """
                     cd "${env.LOADRUNNER_BIN}"
                     taskkill /F /IM "wlrun.exe"
-                    wlrun.exe -Run -TestPath "${env.SCENARIO_PATH}"
+                    wlrun.exe -TestPath "${env.SCENARIO_PATH}" -CollateAndAnalyze -ResultName "${env.RESULT_TEST}" -Run
                 """
             }
         }
