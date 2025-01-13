@@ -57,18 +57,6 @@ pipeline {
                 // wlrun.exe -TestPath "${env.SCENARIO_PATH}" -CollateAndAnalyze -ResultName "${env.RESULT_TEST}" -Run
             }
         }
-
-        // stage('Validate Results') {
-        //     steps {
-        //         script {
-        //             // Validasi apakah hasil tes sudah dibuat (misalnya file log atau hasil tertentu)
-        //             def resultFile = "C:/Users/Administrator/Documents/Result/Res/Res.lrr"
-        //             if (!fileExists(resultFile)) {
-        //                 error "LoadRunner results file not found. LoadRunner might not have executed properly."
-        //             }
-        //         }
-        //     }
-        // }
     }
 
     post {
