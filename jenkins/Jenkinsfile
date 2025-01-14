@@ -59,6 +59,8 @@ pipeline {
         }
     }
 
+    // This is comment
+
     post {
         always {
             echo 'Pipeline finished.'
